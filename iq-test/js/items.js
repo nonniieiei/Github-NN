@@ -98,7 +98,7 @@ function cellInner(cell) {
 }
 const cellFrame = `<rect x="1" y="1" width="98" height="98" rx="6" fill="${PAPER}" stroke="${CELL_BORDER}" stroke-width="1.5"/>`;
 export function cellSvg(cell) {
-  return `<svg viewBox="0 0 100 100" class="fig" aria-hidden="true">${cellFrame}${cellInner(cell)}</svg>`;
+  return `<svg viewBox="0 0 100 100" class="fig" aria-hidden="true"><rect width="100" height="100" rx="6" fill="${PAPER}"/>${cellInner(cell)}</svg>`;
 }
 function matrixSvg(cells) {
   let s = '';
@@ -281,6 +281,9 @@ const SYMBOLS = [
   '<path d="M-0.6,-0.6 L0.6,-0.6 L0.6,-0.3 L0.15,-0.3 L0.15,0.6 L-0.15,0.6 L-0.15,-0.3 L-0.6,-0.3 Z"/>', // ตัว T
   '<circle cx="-0.25" cy="-0.25" r="0.32"/><circle cx="0.4" cy="0.4" r="0.17"/>', // วงกลมใหญ่-เล็ก
 ];
+export function symbolSvg(sym, cls = '') {
+  return `<svg viewBox="-1 -1 2 2" class="${cls}" aria-hidden="true"><g fill="${INK}">${SYMBOLS[sym]}</g></svg>`;
+}
 function symbolG(sym, ox, oy, Rs, Us, scale) {
   const a = Rs[0] * scale, b = Rs[1] * scale, c = -Us[0] * scale, d = -Us[1] * scale;
   return `<g transform="matrix(${a.toFixed(3)} ${b.toFixed(3)} ${c.toFixed(3)} ${d.toFixed(3)} ${ox.toFixed(2)} ${oy.toFixed(2)})" fill="${INK}">${SYMBOLS[sym]}</g>`;
